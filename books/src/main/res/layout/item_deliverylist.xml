@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="150dp">
+    <TextView
+        android:id="@+id/tv_deliveryid_item_rv_deliverylist"
+        android:text="出货id:4324324"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:id="@+id/tv_deliverytime_item_rv_deliverylist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="出货订单创建时间：xxxx"/>
+
+    <TextView
+        android:id="@+id/tv_deliveryinfo_item_rv_deliverylist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="出货书籍列表"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_deliverbook_item_orderlist"
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

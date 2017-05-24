@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+              android:orientation="vertical"
+             android:layout_height="match_parent"
+             tools:context="com.example.book.books.ui.fragment.HomeFragment">
+
+
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+        <ImageView
+            android:layout_marginRight="20dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/head"/>
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="name"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_vieworder_mystore_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:text="点击查看我的订单"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBar"
+        android:text="注销"/>
+
+</LinearLayout>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_abook_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.book.books.ui.activity.ABookDetailActivity">
+
+    <com.example.book.books.ui.views.SlideGroup
+        android:id="@+id/id_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/vp_detail_abook"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_name_detail_abook"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="name"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/tv_intro_detail_abook"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:text="intro"/>
+
+                <TextView
+                    android:id="@+id/tv_price_detail_abook"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="price"/>
+
+                <TextView
+                    android:id="@+id/tv_market_detail_abook"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="market"/>
+
+                <TextView
+                    android:id="@+id/tv_author_detail_abook"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="作者：蕊希"/>
+
+                <TextView
+                    android:id="@+id/tv_press_detail_abook"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="出版：百花洲文艺出版社"/>
+
+                <TextView
+                    android:id="@+id/tv_stockalance_detail_abook"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="库存数量：100"/>
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:drawableRight="@mipmap/arrow_blank_up"
+                android:text="上拉查看图文详情"/>
+
+            <WebView
+                android:id="@+id/vb_detail_abook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></WebView>
+        </LinearLayout>
+
+    </com.example.book.books.ui.views.SlideGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white">
+        
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_add_abook_detail"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#f7be03"
+                android:gravity="center"
+                android:text="添加库存"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/tv_reduce_abook_detail"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@mipmap/product_cart_bg"
+                android:gravity="center"
+                android:text="减少库存"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

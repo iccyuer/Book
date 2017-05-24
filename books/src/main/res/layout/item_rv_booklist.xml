@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:orientation="vertical"
+                android:id="@+id/rl_item_rv_booklist"
+                android:padding="10dp">
+
+    <ImageView
+        android:layout_marginRight="5dp"
+        android:id="@+id/imgv_item_rv_booklist"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@mipmap/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/tv_name_item_rv_booklist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:layout_toRightOf="@id/imgv_item_rv_booklist"
+        android:text="愿你迷路到我身边"/>
+
+    <TextView
+        android:id="@+id/tv_author_item_rv_booklist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_name_item_rv_booklist"
+        android:layout_marginTop="2dp"
+        android:layout_toRightOf="@id/imgv_item_rv_booklist"
+        android:text="作者：蕊希"/>
+
+    <TextView
+        android:id="@+id/tv_press_item_rv_booklist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_author_item_rv_booklist"
+        android:layout_marginTop="2dp"
+        android:layout_toRightOf="@id/imgv_item_rv_booklist"
+        android:text="出版社：百花洲文艺出版社"/>
+
+    <TextView
+        android:id="@+id/tv_price_item_rv_booklist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_press_item_rv_booklist"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/colorBar"
+        android:layout_toRightOf="@id/imgv_item_rv_booklist"
+        android:text="￥ 27.50"/>
+
+    <TextView
+        android:id="@+id/tv_marketprice_item_rv_booklist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_press_item_rv_booklist"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/tv_price_item_rv_booklist"
+        android:text="￥ 27.50"/>
+
+</RelativeLayout>

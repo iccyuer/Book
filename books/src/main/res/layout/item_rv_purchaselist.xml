@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="110dp">
+
+    <TextView
+        android:id="@+id/tv_purchaseid_item_rv_purchaselist"
+        android:text="进货id:4324324"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imgv_purchasepic_item_rv_purchaselist"
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="50dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="50dp"/>
+        <TextView
+            android:text="name"
+            android:id="@+id/tv_purchasename_item_rv_purchaselist"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_purchasetime_item_rv_purchaselist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="进货订单创建时间：xxxx"/>
+
+    <TextView
+        android:id="@+id/tv_purchaseinfo_item_rv_purchaselist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="进货信息"/>
+
+</LinearLayout>

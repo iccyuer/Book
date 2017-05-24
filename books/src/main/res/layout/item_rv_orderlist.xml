@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_marginBottom="5dp"
+              android:id="@+id/ll_item_rv_orderlist"
+              android:background="#6ab3fce8"
+              android:layout_height="150dp">
+
+    <TextView
+        android:id="@+id/tv_orderid_item_rv_orderlist"
+        android:text="订单id:4324324"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_orderbook_item_orderlist"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"></android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/tv_ordertime_item_rv_orderlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="创建订单时间：xxxx"/>
+
+    <TextView
+        android:id="@+id/tv_orderprice_item_rv_orderlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="共1件商品 合计：￥ 88.8"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_orderstate_item_rv_orderlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="订单状态：支付成功"/>
+
+        <TextView
+            android:id="@+id/tv_isdeliver_item_rv_orderlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="是否出货：否"/>
+
+        <Button
+            android:id="@+id/bt_deliver_item_rv_orderlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBar"
+            android:visibility="gone"
+            android:text="确认出货"/>
+    </LinearLayout>
+
+
+</LinearLayout>

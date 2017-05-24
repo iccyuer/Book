@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:background="@android:color/white"
+              android:layout_width="match_parent"
+              android:layout_height="150dp">
+
+    <ImageView
+        android:id="@+id/imgv_more_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginRight="10dp"
+        android:src="@mipmap/arrow_more"/>
+    <TextView
+        android:gravity="center_vertical"
+        android:id="@+id/tv_more_view"
+        android:text="继续滑动跳到详情"
+        android:textDirection="inherit"
+        android:ems="1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+</LinearLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="100dp">
+
+    <CheckBox
+        android:id="@+id/cb_item_rv_carts"
+        android:layout_marginLeft="10dp"
+        android:layout_width="40dp"
+        android:layout_height="match_parent"/>
+    <RelativeLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_marginRight="5dp"
+            android:id="@+id/imgv_book_item_rv_carts"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:id="@+id/tv_name_item_rv_carts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/imgv_book_item_rv_carts"
+            android:text="愿你迷路到我身边"/>
+
+
+        <TextView
+            android:id="@+id/tv_price_item_rv_carts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_name_item_rv_carts"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/colorBar"
+            android:layout_toRightOf="@id/imgv_book_item_rv_carts"
+            android:text="￥ 27.50"/>
+
+        <TextView
+            android:id="@+id/tv_marketprice_item_rv_carts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_name_item_rv_carts"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/tv_price_item_rv_carts"
+            android:text="￥ 27.50"/>
+
+        <TextView
+            android:layout_marginTop="5dp"
+            android:id="@+id/tv_amount_item_rv_carts"
+            android:layout_below="@+id/tv_marketprice_item_rv_carts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/imgv_book_item_rv_carts"
+            android:text="x 1"/>
+
+        <ImageView
+            android:id="@+id/imgv_modify_item_rv_carts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:src="@mipmap/ic_cart_edit_btn"/>
+    </RelativeLayout>
+</LinearLayout>

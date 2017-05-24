@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/welcome"
+    tools:context="com.example.book.books.ui.activity.HomeActivity">
+
+
+    <!--<TextView-->
+        <!--android:layout_above="@+id/tv_select"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:textColor="@color/colorBar"-->
+        <!--android:textSize="18sp"-->
+        <!--android:text="欢迎使用超胜书店图书网上销售系统"/>-->
+
+    <TextView
+        android:id="@+id/tv_select"
+        android:layout_above="@+id/tv_admin_home_activity"
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="请选择"/>
+
+    <TextView
+        android:id="@+id/tv_admin_home_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/shape_tv_select"
+        android:gravity="center"
+        android:text="我是管理员"
+        android:textColor="@android:color/white"
+        android:textSize="23sp"/>
+
+    <TextView
+        android:id="@+id/tv_user_home_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_admin_home_activity"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:background="@drawable/shape_tv_select"
+        android:gravity="center"
+        android:text="我是用户"
+        android:textColor="@android:color/white"
+        android:textSize="23sp"/>
+
+
+</RelativeLayout>

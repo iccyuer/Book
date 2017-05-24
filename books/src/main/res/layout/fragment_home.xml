@@ -1,0 +1,109 @@
+<com.example.book.books.ui.views.MyScrollview xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.example.book.books.ui.fragment.HomeFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:id="@+id/vvvvvp"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_below="@id/search_button">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/vp_banner_frag_home"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+
+            <RadioGroup
+                android:id="@+id/rg_banner_frag_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:layout_width="@dimen/size_red_point"
+                    android:layout_height="@dimen/size_red_point"
+                    android:layout_margin="2dp"
+                    android:background="@drawable/slide_adv_selector"
+                    android:button="@null"
+                    android:clickable="false"/>
+
+                <RadioButton
+                    android:layout_width="@dimen/size_red_point"
+                    android:layout_height="@dimen/size_red_point"
+                    android:layout_margin="2dp"
+                    android:background="@drawable/slide_adv_selector"
+                    android:button="@null"
+                    android:clickable="false"/>
+
+                <RadioButton
+                    android:layout_width="@dimen/size_red_point"
+                    android:layout_height="@dimen/size_red_point"
+                    android:layout_margin="2dp"
+                    android:background="@drawable/slide_adv_selector"
+                    android:button="@null"
+                    android:clickable="false"/>
+
+                <RadioButton
+                    android:layout_width="@dimen/size_red_point"
+                    android:layout_height="@dimen/size_red_point"
+                    android:layout_margin="2dp"
+                    android:background="@drawable/slide_adv_selector"
+                    android:button="@null"
+                    android:clickable="false"/>
+
+            </RadioGroup>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/search_button"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/shape_edt_login"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/imgv_search"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/dd_order_menu_search"/>
+
+            <TextView
+                android:id="@+id/edt_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/imgv_search"
+                android:background="@null"
+                android:hint="用户名"
+                android:text="好书每满150减50"/>
+        </RelativeLayout>
+
+
+        <android.support.v7.widget.RecyclerView
+
+            android:id="@+id/rv_frag_home"
+            android:layout_width="match_parent"
+            android:layout_height="360dp"
+            android:layout_below="@+id/vvvvvp">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <ImageView
+            android:layout_below="@+id/rv_frag_home"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@mipmap/ic_launcher"/>
+
+    </RelativeLayout>
+</com.example.book.books.ui.views.MyScrollview>
