@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="100dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_marginRight="3dp"
+            android:id="@+id/imgv_book_item_rv_selldata"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:layout_alignParentBottom="true"
+            android:id="@+id/tv_amount_item_rv_selldata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="55dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imgv_book_item_rv_selldata"
+            android:text="x1"/>
+
+        <TextView
+            android:paddingLeft="5dp"
+            android:id="@+id/tv_name_item_rv_selldata"
+            android:layout_width="150dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/imgv_book_item_rv_selldata"
+            android:text="name"/>
+
+        <ImageView
+            android:id="@+id/imgv_bg_item_rv_selldata"
+            android:layout_marginTop="3dp"
+            android:background="#36089af4"
+            android:layout_width="150dp"
+            android:layout_height="80dp"/>
+    </RelativeLayout>
+</LinearLayout>

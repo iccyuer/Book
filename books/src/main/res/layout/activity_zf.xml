@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_zf"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    tools:context="com.example.book.books.ui.activity.ZFActivity">
+
+    <TextView
+        android:id="@+id/tv_uppay_zf_activity"
+        android:layout_width="170dp"
+        android:layout_height="80dp"
+        android:drawableLeft="@mipmap/uppay_logo"
+        android:gravity="center_vertical"
+        android:text="  银联支付（模拟）"/>
+
+    <TextView
+        android:id="@+id/tv_mypay_zf_activity"
+        android:layout_width="170dp"
+        android:layout_height="80dp"
+        android:drawableLeft="@mipmap/mypay_logo"
+        android:gravity="center_vertical"
+        android:text="  模拟支付"/>
+</LinearLayout>

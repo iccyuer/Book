@@ -49,31 +49,31 @@
                 />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/type_main_activity"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/type_main_activity"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1">-->
 
-            <ImageView
-                android:id="@+id/imgv_type"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/navigation_typebutton_selector"
-                />
+            <!--<ImageView-->
+                <!--android:id="@+id/imgv_type"-->
+                <!--android:layout_width="25dp"-->
+                <!--android:layout_height="25dp"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:background="@drawable/navigation_typebutton_selector"-->
+                <!--/>-->
 
-            <TextView
-                android:id="@+id/tv_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/imgv_type"
-                android:layout_centerHorizontal="true"
-                android:text="分类"
-                android:textColor="@color/color_selector"
-                android:textSize="12sp"
-                />
-        </RelativeLayout>
+            <!--<TextView-->
+                <!--android:id="@+id/tv_type"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/imgv_type"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:text="分类"-->
+                <!--android:textColor="@color/color_selector"-->
+                <!--android:textSize="12sp"-->
+                <!--/>-->
+        <!--</RelativeLayout>-->
 
         <RelativeLayout
             android:id="@+id/cart_main_activity"

@@ -121,7 +121,7 @@ public class YLActivity extends SBaseActivity implements Runnable,Handler.Callba
         }
         Intent intent=new Intent() ;
         intent.putExtra("result",str);
-        setResult(110,intent);
+        setResult(120,intent);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("支付结果通知");

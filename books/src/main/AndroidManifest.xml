@@ -12,7 +12,7 @@
     <application
         android:name=".base.SBaseApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/lable"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme1">
@@ -60,6 +60,24 @@
         <activity android:name=".ui.activity.AddBooksActivity">
         </activity>
         <activity android:name=".ui.activity.DeliveryActivity">
+        </activity>
+        <activity android:name=".ui.activity.RegisterActivity">
+        </activity>
+        <activity android:name=".ui.activity.UsersInfoActivity">
+        </activity>
+        <activity android:name=".ui.activity.ModifyPwdActivity">
+        </activity>
+        <activity android:name=".ui.activity.ModifyPhoneActivity">
+        </activity>
+        <activity android:name=".ui.activity.UserListActivity">
+        </activity>
+        <activity android:name=".ui.activity.AModifyPwdActivity">
+        </activity>
+        <activity android:name=".ui.activity.ZFActivity">
+        </activity>
+        <activity android:name=".ui.activity.MyPayActivity">
+        </activity>
+        <activity android:name=".ui.activity.SellDataActivity">
         </activity>
     </application>
 

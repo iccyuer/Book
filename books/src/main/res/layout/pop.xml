@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:padding="10dp"
+              android:background="@drawable/shape_pop"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_book_pop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="图书"/>
+
+        <View
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:background="#c5535151"
+            android:layout_width="28dp"
+            android:layout_height="1dp"/>
+        <TextView
+            android:id="@+id/tv_author_pop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="作者"/>
+    </LinearLayout>
+</LinearLayout>

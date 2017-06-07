@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_marginBottom="5dp"
               android:id="@+id/ll_item_rv_orderlist"
+              android:layout_width="match_parent"
+              android:layout_height="150dp"
+              android:layout_marginBottom="5dp"
               android:background="#6ab3fce8"
-              android:layout_height="150dp">
+              android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_orderid_item_rv_orderlist"
-        android:text="订单id:4324324"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_orderid_item_rv_orderlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="订单id:4324324"/>
+
+        <TextView
+            android:id="@+id/tv_username_item_rv_orderlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="30dp"
+            android:text="会员名：temp"/>
+
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_orderbook_item_orderlist"
@@ -31,9 +45,10 @@
         android:text="共1件商品 合计：￥ 88.8"/>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <TextView
             android:id="@+id/tv_orderstate_item_rv_orderlist"
             android:layout_width="wrap_content"
@@ -53,8 +68,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorBar"
-            android:visibility="gone"
-            android:text="确认出货"/>
+            android:text="确认出货"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/bt_dopay_item_rv_orderlist"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBar"
+            android:layout_marginRight="5dp"
+            android:text="去支付"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/bt_cancel_item_rv_orderlist"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBar"
+            android:text="取消订单"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/bt_receive_item_rv_orderlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBar"
+            android:text="确认收货"
+            android:visibility="gone"/>
     </LinearLayout>
 
 

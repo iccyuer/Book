@@ -2,7 +2,9 @@ package com.example.book.books.ui.activity;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.book.books.R;
 import com.example.book.books.base.SBaseActivity;
@@ -15,6 +17,7 @@ import java.util.List;
 public class PurchaseActivity extends SBaseActivity {
     private RecyclerView mRvPurchaselistActivity;
     private ItemRVPurchaseAdapter mMyAdapter;
+    private TextView mTvNopurchase;
 
     @Override
     public int setRootView() {
@@ -25,6 +28,7 @@ public class PurchaseActivity extends SBaseActivity {
     public void initView() {
         mRvPurchaselistActivity = (RecyclerView) findViewById(R.id.rv_purchaselist_activity);
 
+        mTvNopurchase = (TextView) findViewById(R.id.tv_nopurchase);
 
     }
 
@@ -33,6 +37,9 @@ public class PurchaseActivity extends SBaseActivity {
         List<Purchase> allPurchase = PurchaseDao.getPurchaseDao().getAllPurchase();
         if (allPurchase!=null) {
             showRV(allPurchase);
+            mTvNopurchase.setVisibility(View.GONE);
+        }else{
+            mTvNopurchase.setVisibility(View.VISIBLE);
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.book.books.ui.activity;
 
+import android.graphics.Paint;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.book.books.R;
@@ -26,6 +28,7 @@ public class LoginActivity extends SBaseActivity {
     private CheckBox mCbPwdRecord;
     private Button mBtLogin;
     private View.OnClickListener mOnClickListener;
+    private TextView mTvGoregister;
 
 
     @Override
@@ -41,7 +44,8 @@ public class LoginActivity extends SBaseActivity {
         mCbPassShow = (CheckBox) findViewById(R.id.cb_pass_show);
         mCbPwdRecord = (CheckBox) findViewById(R.id.cb_pwd_record);
         mBtLogin = (Button) findViewById(R.id.bt_login);
-
+        mTvGoregister = (TextView) findViewById(R.id.tv_goregister);
+        mTvGoregister.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
 
         mEdtUserpwd.setInputType(EditorInfo.TYPE_TEXT_VARIATION_PASSWORD | EditorInfo.TYPE_CLASS_TEXT);
         mEdtUsername.setText(LoginSP.getUid());
@@ -95,28 +99,26 @@ public class LoginActivity extends SBaseActivity {
         //发起登录后 解除注册
         unRegesiterBTLoginLis();
 
-        if (mCbPwdRecord.isChecked()) {
-            LoginSP.saveUid(uid);
-            LoginSP.saveUserpwd(passwd);
-        } else {
-            LoginSP.saveUid("");
-            LoginSP.saveUserpwd("");
-        }
 
         boolean b = UsersDao.getUsersDao().loginInByNameAndPwd(uid, passwd);
 
         System.out.println("b = " + b);
         //登录失败
-        if (b==false){
+        if (b == false) {
             regesiterBTLoginLis();
             LoginSP.saveUid("");
             LoginSP.saveUserpwd("");
             Toast.makeText(mActivitySelf, "用户名或密码错误", Toast.LENGTH_SHORT).show();
-        }else{
-            LoginSP.saveUid(uid);
-            LoginSP.saveUserpwd(passwd);
+        } else {
+            if (mCbPwdRecord.isChecked()) {
+                LoginSP.saveUid(uid);
+                LoginSP.saveUserpwd(passwd);
+            } else {
+                LoginSP.saveUid("");
+                LoginSP.saveUserpwd("");
+            }
             Toast.makeText(mActivitySelf, "登录成功", Toast.LENGTH_SHORT).show();
-            onUserId =UsersDao.getUsersDao().getUserIdByName(LoginSP.getUid());
+            onUserId = UsersDao.getUsersDao().getUserIdByName(uid);
             finish();
         }
 
@@ -131,4 +133,8 @@ public class LoginActivity extends SBaseActivity {
     public void initDatas() {
 
     }
+    public void goregister(View view){
+        gotoActivity(RegisterActivity.class);
+    }
+
 }

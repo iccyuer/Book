@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_sell_data"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.book.books.ui.activity.SellDataActivity">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="请选择时间范围"
+        android:textColor="@color/colorppp"
+        android:textSize="18sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_show_timepickera_selldata_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="请选择开始日期"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="  ~  "
+            android:textSize="18sp"/>
+
+        <Button
+            android:id="@+id/bt_show_timepickerb_selldata_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="请选择结束日期"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@color/colorBar"
+            android:gravity="center"
+            android:onClick="tongji"
+            android:padding="10dp"
+            android:text="统计"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_selldata_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/ll_empty_selldata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/empty_selldata"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="所选范围没有出货数据~"/>
+    </LinearLayout>
+
+</LinearLayout>

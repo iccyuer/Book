@@ -29,6 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_name_item_rv_booklist"
         android:layout_marginTop="2dp"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:layout_toRightOf="@id/imgv_item_rv_booklist"
         android:text="作者：蕊希"/>
 
@@ -60,5 +62,15 @@
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/tv_price_item_rv_booklist"
         android:text="￥ 27.50"/>
+
+    <TextView
+        android:id="@+id/tv_delete_item_rv_booklist"
+        android:background="@color/colorBar"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text="删除"/>
 
 </RelativeLayout>

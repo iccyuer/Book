@@ -10,6 +10,7 @@ import com.example.book.books.base.SBaseFragment;
 import com.example.book.books.ui.activity.DeliveryActivity;
 import com.example.book.books.ui.activity.OrderDetailActivity;
 import com.example.book.books.ui.activity.PurchaseActivity;
+import com.example.book.books.ui.activity.UserListActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +20,8 @@ public class AManageFragment extends SBaseFragment implements View.OnClickListen
     private Button mBtUndeliverAmanageFrag;
     private Button mBtAllorderAmanageFrag;
     private Button mBtDeliverAmanageFrag;
+    private Button mBtShowuserAmanageFrag;
+
 
 
 
@@ -33,12 +36,14 @@ public class AManageFragment extends SBaseFragment implements View.OnClickListen
         mBtUndeliverAmanageFrag = (Button) findViewById(R.id.bt_unorder_amanage_frag);
         mBtAllorderAmanageFrag = (Button) findViewById(R.id.bt_allorder_amanage_frag);
         mBtDeliverAmanageFrag = (Button) findViewById(R.id.bt_deliver_amanage_frag);
+        mBtShowuserAmanageFrag = (Button) findViewById(R.id.bt_showuser_amanage_frag);
 
 
         mBtPurchaseAmanageFrag.setOnClickListener(this);
         mBtUndeliverAmanageFrag.setOnClickListener(this);
         mBtAllorderAmanageFrag.setOnClickListener(this);
         mBtDeliverAmanageFrag.setOnClickListener(this);
+        mBtShowuserAmanageFrag.setOnClickListener(this);
     }
 
     @Override
@@ -61,6 +66,9 @@ public class AManageFragment extends SBaseFragment implements View.OnClickListen
                 break;
             case R.id.bt_deliver_amanage_frag:
                 gotoActivity(DeliveryActivity.class);
+                break;
+            case R.id.bt_showuser_amanage_frag:
+                gotoActivity(UserListActivity.class);
                 break;
         }
     }

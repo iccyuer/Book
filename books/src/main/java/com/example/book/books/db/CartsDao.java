@@ -35,7 +35,7 @@ public class CartsDao {
 
     public void addCarts(Carts carts) {
         try {
-            x.getDb(BooksDaoConfig.getBooksDaoConfig()).save(carts);
+            x.getDb(BooksDaoConfig.getBooksDaoConfig()).saveBindingId(carts);
         } catch (DbException e) {
             e.printStackTrace();
         }
@@ -172,6 +172,14 @@ public class CartsDao {
         carts.setCanShow(state);
         try {
             x.getDb(BooksDaoConfig.getBooksDaoConfig()).update(carts,"isCanShow");
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteCarts(Carts carts){
+        try {
+            x.getDb(BooksDaoConfig.getBooksDaoConfig()).delete(carts);
         } catch (DbException e) {
             e.printStackTrace();
         }

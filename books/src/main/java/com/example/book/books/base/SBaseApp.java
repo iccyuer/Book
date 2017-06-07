@@ -37,6 +37,7 @@ public class SBaseApp extends BaseApp {
         }else{
             onUserId =0;
         }
+//        Logger.i(onUserId+"");
     }
 
     @Override

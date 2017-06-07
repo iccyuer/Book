@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.example.book.library.R;
 import com.example.book.library.control.ActivityControl;
 
+import java.util.ArrayList;
+
 
 /**
  * Created by Administractor on 2016/12/28.
@@ -57,7 +59,8 @@ public abstract class BaseActivity extends FragmentActivity {
         initView();
         initDatas();
     }
-    public void initOthers(){
+
+    public void initOthers() {
 
     }
 
@@ -82,7 +85,7 @@ public abstract class BaseActivity extends FragmentActivity {
         mTitleRight = (TextView) titleView.findViewById(R.id.title_right);
 
         mTitleCenter.setVisibility(View.INVISIBLE);
-        if (mTitleRight!=null) {
+        if (mTitleRight != null) {
             mTitleRight.setVisibility(View.INVISIBLE);
         }
 
@@ -115,7 +118,7 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     public void setTitleRight(String text, View.OnClickListener onClickListener) {
-        if(mTitleRight!=null){
+        if (mTitleRight != null) {
             mTitleRight.setVisibility(View.VISIBLE);
             if (text != null) {
                 mTitleRight.setText(text);
@@ -128,12 +131,24 @@ public abstract class BaseActivity extends FragmentActivity {
 
 
     public void setTitleLeft(View.OnClickListener onClickListener) {
-        if(mTitleLeft!=null){
+        if (mTitleLeft != null) {
             mTitleLeft.setVisibility(View.VISIBLE);
             if (onClickListener != null) {
                 mTitleLeft.setOnClickListener(onClickListener);
             }
         }
+    }
+
+    public void setTitleRightGone(){
+        mTitleRight.setVisibility(View.GONE);
+    }
+
+    public void setTitleLeftGone(){
+        mTitleLeft.setVisibility(View.GONE);
+    }
+
+    public void setTitleLeftVISIBLE(){
+        mTitleLeft.setVisibility(View.VISIBLE);
     }
 
     public boolean isNeedTitle() {
@@ -162,7 +177,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
     public void gotoActivity(Class des, String key, int data) {
         Intent intent = new Intent(this, des);
-        intent.putExtra(key,data);
+        intent.putExtra(key, data);
         startActivity(intent);
     }
 
@@ -171,6 +186,21 @@ public abstract class BaseActivity extends FragmentActivity {
         intent.putExtra(key, data);
         startActivity(intent);
     }
+
+    public void gotoActivity(Class des, String key1, String data1, String key2, String data2) {
+        Intent intent = new Intent(this, des);
+        intent.putExtra(key1, data1);
+        intent.putExtra(key2, data2);
+        startActivity(intent);
+    }
+
+    public void gotoActivity(Class des, String key1, ArrayList<Integer> datas, String key2, Float allprice) {
+        Intent intent = new Intent(mActivitySelf, des);
+        intent.putIntegerArrayListExtra(key1,datas);
+        intent.putExtra(key2,allprice);
+        startActivity(intent);
+    }
+
 
     //快捷跳转到service
     public void gotoService(Class des) {
@@ -203,7 +233,7 @@ public abstract class BaseActivity extends FragmentActivity {
         transaction.commit();
     }
 
-    public void removeFrag( BaseFragment fragment) {
+    public void removeFrag(BaseFragment fragment) {
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
         transaction.remove(fragment);
         transaction.commit();
@@ -215,13 +245,13 @@ public abstract class BaseActivity extends FragmentActivity {
         transaction.commit();
     }
 
-    public void hideFrag( BaseFragment fragment) {
+    public void hideFrag(BaseFragment fragment) {
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
         transaction.hide(fragment);
         transaction.commit();
     }
 
-    public void showFrag( BaseFragment fragment) {
+    public void showFrag(BaseFragment fragment) {
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
         transaction.show(fragment);
         transaction.commit();

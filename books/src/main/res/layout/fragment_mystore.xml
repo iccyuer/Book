@@ -7,6 +7,7 @@
 
 
     <LinearLayout
+        android:id="@+id/ll_userinfo"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="70dp">
@@ -16,10 +17,11 @@
             android:layout_height="50dp"
             android:src="@mipmap/head"/>
         <TextView
+            android:id="@+id/tv_username_mystore"
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="name"/>
+            android:text="还没登录~"/>
     </LinearLayout>
 
     <Button
@@ -30,6 +32,7 @@
         android:text="点击查看我的订单"/>
 
     <Button
+        android:id="@+id/bt_login_or_out"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorBar"

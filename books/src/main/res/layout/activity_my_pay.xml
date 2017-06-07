@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_my_pay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#d6d4d4d4"
+    tools:context="com.example.book.books.ui.activity.MyPayActivity">
+
+
+    <LinearLayout
+        android:id="@+id/ll_orderinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:onClick="openorclose"
+        android:orientation="vertical"
+        android:paddingBottom="0dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="订单金额      "/>
+
+            <TextView
+                android:id="@+id/tv_orderprice_mypay_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.01元"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="商户名称      "/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="超胜网上书店"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_orderinfo_describe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="订单描述      "/>
+
+            <TextView
+                android:id="@+id/tv_describe_mypay_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="订单描述"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_orderinfo_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="交易时间      "/>
+
+            <TextView
+                android:id="@+id/tv_ordertime_mypay_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="date"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_orderinfo_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="订单编号      "/>
+
+            <TextView
+                android:id="@+id/tv_orderid_mypay_activity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="888"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imgv_orderinfo_arrow_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:src="@mipmap/flash_arrow_down_active"/>
+
+        <ImageView
+            android:id="@+id/imgv_orderinfo_arrow_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:src="@mipmap/flash_arrow_up_active"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_mypayinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_orderinfo"
+        android:layout_marginTop="15dp"
+        android:background="#fff"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:onClick="putpayid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="请输入支付账号（188888888） 点击免输入"/>
+
+        <EditText
+            android:id="@+id/edt_mypay_payid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="@null"
+            android:hint="请输入支付账号"
+            android:inputType="number"
+            android:textCursorDrawable="@null"/>
+
+        <EditText
+            android:id="@+id/edt_mypay_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="请输入支付密码"
+            android:inputType="number"
+            android:textCursorDrawable="@null"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_payment_mypay_activity"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@+id/ll_mypayinfo"
+        android:layout_margin="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorBar"
+        android:gravity="center"
+        android:text="支付"
+        android:textColor="@android:color/white"
+        android:textSize="19sp"/>
+
+    <FrameLayout
+        android:id="@+id/layout_frag_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="#0fff">
+    </FrameLayout>
+</RelativeLayout>

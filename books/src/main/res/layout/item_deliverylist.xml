@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="150dp">
+              android:layout_height="175dp">
     <TextView
+        android:layout_marginTop="3dp"
         android:id="@+id/tv_deliveryid_item_rv_deliverylist"
         android:text="出货id:4324324"
         android:layout_width="match_parent"
@@ -25,6 +26,12 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_deliverbook_item_orderlist"
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:layout_height="110dp">
     </android.support.v7.widget.RecyclerView>
+
+    <View
+        android:layout_marginTop="3dp"
+        android:background="#c79f9b9b"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
 </LinearLayout>

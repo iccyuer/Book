@@ -26,7 +26,7 @@ public class Orders {
     private long orderTime;
 
     @Column(name = "orderState")
-    private String orderState;
+    private String orderState="";
 
     @Column(name = "isDeliver")
     private boolean isDeliver;

@@ -37,4 +37,12 @@
         android:background="@color/colorppp"
         android:text="查看出货订单"/>
 
+    <Button
+    android:id="@+id/bt_showuser_amanage_frag"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:background="@color/colorppp"
+    android:text="查看用户信息"/>
+
 </LinearLayout>

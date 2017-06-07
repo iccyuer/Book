@@ -42,7 +42,7 @@ public class PurchaseDao {
     public List<Purchase> getAllPurchase(){
         try {
             return x.getDb(BooksDaoConfig.getBooksDaoConfig()).selector(Purchase.class)
-                    .findAll();
+                    .orderBy("purchaseid",true).findAll();
         } catch (DbException e) {
             e.printStackTrace();
         }

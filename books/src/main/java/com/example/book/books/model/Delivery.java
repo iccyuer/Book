@@ -32,4 +32,12 @@ public class Delivery {
     public void setDeliveryTime(long deliveryTime) {
         this.deliveryTime = deliveryTime;
     }
+
+    @Override
+    public String toString() {
+        return "Delivery{" +
+                "deliveryid=" + deliveryid +
+                ", deliveryTime=" + deliveryTime +
+                '}';
+    }
 }

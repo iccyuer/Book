@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@mipmap/xn_great1"
+              android:orientation="vertical">
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:textColor="@android:color/black"
+        android:id="@+id/tv_sell_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="xx时间出货统计表"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:textColor="#00f"
+        android:id="@+id/tv_sell_num"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="出货总数目：300W册"/>
+
+    <TextView
+        android:textColor="#00f"
+        android:id="@+id/tv_sell_price"
+        android:paddingBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="总销售额：3000元"/>
+
+    <Button
+        android:id="@+id/bt_sell_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#bbfe9c36"
+        android:text="再接再厉"/>
+</LinearLayout>

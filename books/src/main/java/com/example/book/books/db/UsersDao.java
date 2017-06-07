@@ -5,6 +5,8 @@ import com.example.book.books.model.Users;
 import org.xutils.ex.DbException;
 import org.xutils.x;
 
+import java.util.List;
+
 /**
  * Created by Admin on 2017/5/14.
  */
@@ -90,5 +92,32 @@ public class UsersDao {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public Users getUserByUserId(int userid){
+        try {
+            return x.getDb(BooksDaoConfig.getBooksDaoConfig()).selector(Users.class)
+                    .where("userid","=",userid).findFirst();
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void updateUsersInfo(Users users){
+        try {
+            x.getDb(BooksDaoConfig.getBooksDaoConfig()).update(users);
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Users> getAllUsers(){
+        try {
+            return x.getDb(BooksDaoConfig.getBooksDaoConfig()).selector(Users.class).findAll();
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

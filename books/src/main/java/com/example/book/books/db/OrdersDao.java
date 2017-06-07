@@ -56,7 +56,7 @@ public class OrdersDao {
     public List<Orders> getOrdersByUserId(int userid){
         try {
             List<Orders> orderses = x.getDb(BooksDaoConfig.getBooksDaoConfig()).selector(Orders.class)
-                    .where("userid", "=", userid).findAll();
+                    .where("userid", "=", userid).orderBy("orderid",true).findAll();
             return orderses;
         } catch (DbException e) {
             e.printStackTrace();
@@ -71,7 +71,7 @@ public class OrdersDao {
     public List<Orders> getOrders() {
         try {
             List<Orders> orderses = x.getDb(BooksDaoConfig.getBooksDaoConfig()).selector(Orders.class)
-                    .findAll();
+                    .orderBy("orderid",true).findAll();
             return orderses;
         } catch (DbException e) {
             e.printStackTrace();
@@ -87,7 +87,7 @@ public class OrdersDao {
     public List<Orders> getOrdersUn() {
         try {
             List<Orders> orderses = x.getDb(BooksDaoConfig.getBooksDaoConfig()).selector(Orders.class)
-                    .where("isDeliver","=",false).and("orderState","=","交易成功").findAll();
+                    .where("isDeliver","=",false).and("orderState","=","交易成功").orderBy("orderid",true).findAll();
             return orderses;
         } catch (DbException e) {
             e.printStackTrace();

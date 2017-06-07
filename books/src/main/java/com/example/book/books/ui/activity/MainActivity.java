@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,7 +16,6 @@ import com.example.book.books.base.SBaseFragment;
 import com.example.book.books.ui.fragment.CartFragment;
 import com.example.book.books.ui.fragment.HomeFragment;
 import com.example.book.books.ui.fragment.MyStoreFragment;
-import com.example.book.books.ui.fragment.TypeFragment;
 import com.example.book.books.ui.fragment.WelcomeFragment;
 
 public class MainActivity extends SBaseActivity implements View.OnClickListener {
@@ -41,10 +39,10 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener 
     private TextView mTvMystore;
 
     private HomeFragment mHomeFragment = new HomeFragment();
-    private TypeFragment mTypeFragment = new TypeFragment();
+//    private TypeFragment mTypeFragment = new TypeFragment();
     private CartFragment mCartFragment = new CartFragment();
     private MyStoreFragment mMyStoreFragment = new MyStoreFragment();
-    private SBaseFragment[] mShopBaseFragments = {mHomeFragment, mTypeFragment, mCartFragment, mMyStoreFragment};
+    private SBaseFragment[] mShopBaseFragments = {mHomeFragment, mCartFragment, mMyStoreFragment};
 
 
     private WelcomeFragment mWelcomeFragment=new WelcomeFragment() ;
@@ -54,10 +52,10 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener 
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case REMOVE_WELCOME:
-                    removeFrag(mWelcomeFragment);
-                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//撤销全屏显示
+//                    removeFrag(mWelcomeFragment);
+//                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//撤销全屏显示
                     //为了欢迎页不受影响，把FrameLayout父布局设置为白背景，欢迎页消失时，把布局隐藏了
-                    mLayoutFragWelcome.setVisibility(View.GONE);
+//                    mLayoutFragWelcome.setVisibility(View.GONE);
                     break;
                 case 1:
                     break;
@@ -66,9 +64,10 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener 
         }
     };
 
+
     @Override
     public int setRootView() {
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//全屏显示
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//全屏显示
         return R.layout.activity_main;
     }
 
@@ -79,8 +78,8 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener 
         mNaviMainActivity = (LinearLayout) findViewById(R.id.navi_main_activity);
         mHomeMainActivity = (RelativeLayout) findViewById(R.id.home_main_activity);
         mImgvHome = (ImageView) findViewById(R.id.imgv_home);
-        mTypeMainActivity = (RelativeLayout) findViewById(R.id.type_main_activity);
-        mImgvType = (ImageView) findViewById(R.id.imgv_type);
+//        mTypeMainActivity = (RelativeLayout) findViewById(R.id.type_main_activity);
+//        mImgvType = (ImageView) findViewById(R.id.imgv_type);
         mCartMainActivity = (RelativeLayout) findViewById(R.id.cart_main_activity);
         mImgvCart = (ImageView) findViewById(R.id.imgv_cart);
         mMystoreMainActivity = (RelativeLayout) findViewById(R.id.mystore_main_activity);
@@ -88,16 +87,25 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener 
         mLayoutFragWelcome = (FrameLayout) findViewById(R.id.layout_frag_welcome);
 
 
-        mTvHome = (TextView) findViewById(R.id.tv_home);
-        mTvType = (TextView) findViewById(R.id.tv_type);
-        mTvCart = (TextView) findViewById(R.id.tv_cart);
-        mTvMystore = (TextView) findViewById(R.id.tv_mystore);
+//        mTvHome = (TextView) findViewById(R.id.tv_home);
+//        mTvType = (TextView) findViewById(R.id.tv_type);
+//        mTvCart = (TextView) findViewById(R.id.tv_cart);
+//        mTvMystore = (TextView) findViewById(R.id.tv_mystore);
 
+        //调到homefrag
+        mCartFragment.setOncheckedListener(new CartFragment.OncheckedListener() {
+            @Override
+            public void onChecked(String frag) {
+                if ("home".equals(frag)) {
+                    mHomeMainActivity.performClick();
+                }
+            }
+        });
 
         mHomeMainActivity.setOnClickListener(this);
 //        mHomeMainActivity.setOnTouchListener(this);
 //        mImgvHome.setOnClickListener(this);
-        mTypeMainActivity.setOnClickListener(this);
+//        mTypeMainActivity.setOnClickListener(this);
 //        mTypeMainActivity.setOnTouchListener(this);
 //        mImgvType.setOnClickListener(this);
         mCartMainActivity.setOnClickListener(this);
@@ -107,8 +115,8 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener 
 //        mMystoreMainActivity.setOnTouchListener(this);
 //        mImgvMystore.setOnClickListener(this);
 
-        addFrag(R.id.layout_frag_welcome, mWelcomeFragment);
-        mHandler.sendEmptyMessageDelayed(REMOVE_WELCOME, 500);
+//        addFrag(R.id.layout_frag_welcome, mWelcomeFragment);
+//        mHandler.sendEmptyMessageDelayed(REMOVE_WELCOME, 500);
         addFrag(R.id.layout_change_frag_main_activity, mHomeFragment);
     }
 
@@ -131,8 +139,11 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener 
         String fragment = intent.getStringExtra("fragment");
         System.out.println("fragment = " + fragment);
         if ("carts".equals(fragment)) {
-            changeHideShow(mCartFragment, 2);
+            changeHideShow(mCartFragment, 1);
         }
+//        if ("home".equals(fragment)) {
+//            changeHideShow(mHomeFragment, 0);
+//        }
     }
 
     @Override
@@ -152,19 +163,19 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener 
                 posNow = 0;
                 break;
 
-            case R.id.type_main_activity:
-                sBaseFragmentNow = mTypeFragment;
-                posNow = 1;
-                break;
+//            case R.id.type_main_activity:
+//                sBaseFragmentNow = mTypeFragment;
+//                posNow = 1;
+//                break;
 
             case R.id.cart_main_activity:
                 sBaseFragmentNow = mCartFragment;
-                posNow = 2;
+                posNow = 1;
                 break;
 
             case R.id.mystore_main_activity:
                 sBaseFragmentNow = mMyStoreFragment;
-                posNow = 3;
+                posNow = 2;
                 break;
         }
         changeHideShow(sBaseFragmentNow, posNow);
@@ -184,7 +195,7 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener 
             }
         }
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 3; i++) {
             int colorNormal = getResources().getColor(R.color.colorNormal);
             int colorPress = getResources().getColor(R.color.colorPressed);
 
@@ -203,18 +214,18 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener 
                     tv.setTextColor(colorNormal);
                 }
             }
+//            if (i == 1) {
+//                ImageView imgv = (ImageView) mTypeMainActivity.getChildAt(0);
+//                TextView tv = (TextView) mTypeMainActivity.getChildAt(1);
+//                if (i == pos) {
+//                    imgv.setImageResource(R.drawable.navigation_typebutton_pressed);
+//                    tv.setTextColor(colorPress);
+//                } else {
+//                    imgv.setImageResource(R.drawable.navigation_typebutton_normal);
+//                    tv.setTextColor(colorNormal);
+//                }
+//            }
             if (i == 1) {
-                ImageView imgv = (ImageView) mTypeMainActivity.getChildAt(0);
-                TextView tv = (TextView) mTypeMainActivity.getChildAt(1);
-                if (i == pos) {
-                    imgv.setImageResource(R.drawable.navigation_typebutton_pressed);
-                    tv.setTextColor(colorPress);
-                } else {
-                    imgv.setImageResource(R.drawable.navigation_typebutton_normal);
-                    tv.setTextColor(colorNormal);
-                }
-            }
-            if (i == 2) {
                 ImageView imgv = (ImageView) mCartMainActivity.getChildAt(0);
                 TextView tv = (TextView) mCartMainActivity.getChildAt(1);
                 if (i == pos) {
@@ -225,7 +236,7 @@ public class MainActivity extends SBaseActivity implements View.OnClickListener 
                     tv.setTextColor(colorNormal);
                 }
             }
-            if (i == 3) {
+            if (i == 2) {
                 ImageView imgv = (ImageView) mMystoreMainActivity.getChildAt(0);
                 TextView tv = (TextView) mMystoreMainActivity.getChildAt(1);
                 if (i == pos) {

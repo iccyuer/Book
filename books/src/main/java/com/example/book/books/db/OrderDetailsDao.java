@@ -39,6 +39,9 @@ public class OrderDetailsDao {
         }
     }
 
+    /**
+     * 获取所有和orderid相关的
+     */
     List<Integer> mCartIds=new ArrayList<>() ;
     public List<Integer> getCartIds(int orderid){
         try {
@@ -55,5 +58,22 @@ public class OrderDetailsDao {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 获取单个
+     * @return
+     */
+    public int getCartId(int orderid){
+        try {
+            OrderDetails details = x.getDb(BooksDaoConfig.getBooksDaoConfig()).selector(OrderDetails.class)
+                    .where("orderid", "=", orderid).findFirst();
+            if (details!=null) {
+                return details.getCartid();
+            }
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

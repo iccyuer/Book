@@ -2,7 +2,9 @@ package com.example.book.books.ui.activity;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.book.books.R;
 import com.example.book.books.base.SBaseActivity;
@@ -15,6 +17,7 @@ import java.util.List;
 public class DeliveryActivity extends SBaseActivity {
     private RecyclerView mRvDeliverlistActivity;
     private ItemRVDeliveryAdapter mMyAdapter;
+    private TextView mTvNodeliver;
 
     @Override
     public int setRootView() {
@@ -26,6 +29,8 @@ public class DeliveryActivity extends SBaseActivity {
 
         mRvDeliverlistActivity = (RecyclerView) findViewById(R.id.rv_deliverlist_activity);
 
+        mTvNodeliver = (TextView) findViewById(R.id.tv_nodeliver);
+
     }
 
     @Override
@@ -33,6 +38,9 @@ public class DeliveryActivity extends SBaseActivity {
         List<Delivery> allDelivery = DeliveryDao.getDeliveryDao().getAllDelivery();
         if (allDelivery!=null) {
             showRV(allDelivery);
+            mTvNodeliver.setVisibility(View.GONE);
+        }else{
+            mTvNodeliver.setVisibility(View.VISIBLE);
         }
     }
 

@@ -7,6 +7,15 @@
     android:layout_height="match_parent"
     tools:context="com.example.book.books.ui.activity.PurchaseActivity">
 
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_nopurchase"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="还没有订单o"/>
+
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_purchaselist_activity"
         android:layout_width="match_parent"

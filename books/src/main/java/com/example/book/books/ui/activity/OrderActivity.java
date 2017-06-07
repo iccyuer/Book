@@ -15,9 +15,11 @@ import com.example.book.books.base.SBaseApp;
 import com.example.book.books.db.CartsDao;
 import com.example.book.books.db.OrderDetailsDao;
 import com.example.book.books.db.OrdersDao;
+import com.example.book.books.db.UsersDao;
 import com.example.book.books.model.Carts;
 import com.example.book.books.model.OrderDetails;
 import com.example.book.books.model.Orders;
+import com.example.book.books.model.Users;
 import com.example.book.books.ui.adapter.ItemRVOrdersAdapter;
 
 import java.util.ArrayList;
@@ -32,6 +34,9 @@ public class OrderActivity extends SBaseActivity {
     private float mAllprice;
     private ArrayList<Integer> mCartsids;
     private Orders mOrders;
+    private TextView mTvUsernameOrderActivity;
+    private TextView mTvUserphoneOrderActivity;
+    private TextView mTvUseraddressOrderActivity;
 
     @Override
     public int setRootView() {
@@ -42,6 +47,11 @@ public class OrderActivity extends SBaseActivity {
     public void initView() {
         mRvOrderActivity = (RecyclerView) findViewById(R.id.rv_order_activity);
         mTvAllpriceOrderActivity = (TextView) findViewById(R.id.tv_allprice_order_activity);
+
+        mTvUsernameOrderActivity = (TextView) findViewById(R.id.tv_username_order_activity);
+        mTvUserphoneOrderActivity = (TextView) findViewById(R.id.tv_userphone_order_activity);
+        mTvUseraddressOrderActivity = (TextView) findViewById(R.id.tv_useraddress_order_activity);
+
         mBtSubmitOrderActivity = (Button) findViewById(R.id.bt_submit_order_activity);
 
         mBtSubmitOrderActivity.setOnClickListener(new View.OnClickListener() {
@@ -52,31 +62,40 @@ public class OrderActivity extends SBaseActivity {
                 mOrders.setAllprice(mAllprice);
                 mOrders.setOrderTime(System.currentTimeMillis());
                 OrdersDao.getOrdersDao().addOrders(mOrders);
-                int orderid =  mOrders.getOrderid();
+                int orderid = mOrders.getOrderid();
                 System.out.println("orderid = " + orderid);
 
                 for (Integer cartsid : mCartsids) {
-                    OrderDetails orderDetails=new OrderDetails() ;
+                    OrderDetails orderDetails = new OrderDetails();
                     orderDetails.setUserid(SBaseApp.onUserId);
                     orderDetails.setOrderid(orderid);
                     orderDetails.setCartid(cartsid);
                     OrderDetailsDao.getOrderDetailsDao().addOrderDetails(orderDetails);
                 }
-                Intent intent=new Intent(OrderActivity.this,YLActivity.class);
-                startActivityForResult(intent,110);
+//                Intent intent=new Intent(OrderActivity.this,YLActivity.class);
+//                startActivityForResult(intent,110);
+                Intent intent1 = new Intent(OrderActivity.this, ZFActivity.class);
+                intent1.putExtra("orderid", orderid);
+                startActivityForResult(intent1, 110);
             }
         });
     }
 
     @Override
     public void initDatas() {
+
+        Users users = UsersDao.getUsersDao().getUserByUserId(SBaseApp.onUserId);
+//        Logger.i(users.toString());
+        mTvUsernameOrderActivity.setText(users.getUserName());
+        mTvUserphoneOrderActivity.setText(users.getUserphone());
+        mTvUseraddressOrderActivity.setText(users.getUserAddress());
+
         Intent intent = getIntent();
         mCartsids = intent.getIntegerArrayListExtra("cartsids");
         mAllprice = intent.getFloatExtra("allprice", 0);
-        mTvAllpriceOrderActivity.setText("总额（含运费） ￥ "+ mAllprice);
-
+        mTvAllpriceOrderActivity.setText("总额（含运费） ￥ " + mAllprice);
         List<Carts> cartses = CartsDao.getCartsDao().getCartsByCartsId(SBaseApp.onUserId, mCartsids);
-        if (cartses!=null) {
+        if (cartses != null) {
             showRV(cartses);
         }
     }
@@ -93,22 +112,22 @@ public class OrderActivity extends SBaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (110==requestCode) {
+        if (110 == requestCode&&120==resultCode) {
             String result = data.getStringExtra("result");
             Toast.makeText(mActivitySelf, result, Toast.LENGTH_SHORT).show();
             //只要订单生成了，无论支付成功、失败、取消，修改购物车商品属性（清空购物车）
             for (Integer cartsid : mCartsids) {
                 Carts carts = CartsDao.getCartsDao().getgetCartsByCartIdAndUserId(cartsid, SBaseApp.onUserId);
-                if (carts!=null) {
-                    CartsDao.getCartsDao().updateCartsState(carts,false);
+                if (carts != null) {
+                    CartsDao.getCartsDao().updateCartsState(carts, false);
                 }
             }
             if (result.equalsIgnoreCase("success")) {
-                OrdersDao.getOrdersDao().updateOrdersState(mOrders,"交易成功");
+                OrdersDao.getOrdersDao().updateOrdersState(mOrders, "交易成功");
             } else if (result.equalsIgnoreCase("fail")) {
-                OrdersDao.getOrdersDao().updateOrdersState(mOrders,"交易失败");
+                OrdersDao.getOrdersDao().updateOrdersState(mOrders, "交易失败");
             } else if (result.equalsIgnoreCase("cancel")) {
-                OrdersDao.getOrdersDao().updateOrdersState(mOrders,"交易取消");
+                OrdersDao.getOrdersDao().updateOrdersState(mOrders, "交易取消");
             }
             finish();
         }

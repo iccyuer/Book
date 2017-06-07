@@ -5,10 +5,11 @@
              tools:context="com.example.book.books.ui.fragment.AHomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <Button
+        android:id="@+id/bt_selldata_amy_frag"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="my"/>
+        android:layout_height="wrap_content"
+        android:background="@color/colorBar"
+        android:text="查看销售统计"/>
 
 </FrameLayout>

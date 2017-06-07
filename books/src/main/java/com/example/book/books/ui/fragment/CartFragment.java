@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -14,10 +15,14 @@ import android.widget.Toast;
 import com.example.book.books.R;
 import com.example.book.books.base.SBaseApp;
 import com.example.book.books.base.SBaseFragment;
+import com.example.book.books.db.BooksDao;
 import com.example.book.books.db.CartsDao;
+import com.example.book.books.model.Books;
 import com.example.book.books.model.Carts;
+import com.example.book.books.ui.activity.LoginActivity;
 import com.example.book.books.ui.activity.OrderActivity;
 import com.example.book.books.ui.adapter.ItemRVCartsAdapter;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,42 +30,71 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CartFragment extends SBaseFragment {
+public class CartFragment extends SBaseFragment implements View.OnClickListener {
     private RecyclerView mRvCartsActivity;
     private ItemRVCartsAdapter mMyAdapter;
-    private TextView mTvNobookCartFragment;
-    private TextView mTvNologinCartFragment;
     private TextView mTvAllpriceCartFragment;
     private CheckBox mCbSelectallCartFragment;
     private List<Carts> mCartses;
     private TextView mTvSettlementCartFragment;
+    private LinearLayout mLlBottom;
+    private LinearLayout mLlNobookCartFragment;
+    private Button mBtDostrollCartFragment;
+    private LinearLayout mLlNologinCartFragment;
+    private Button mBtDologinCartFragment;
+    private LinearLayout mLlSettlementCartFragment;
+    private LinearLayout mLlDeleteCartFragment;
+    private TextView mTvDeleteCartFragment;
 
-
-    //是否为全部选中
-    public static boolean isTouchAllChecked;
-
-    public static boolean isAllChecked;
 
     @Override
     public int setRootView() {
         return R.layout.fragment_cart;
     }
 
-
     @Override
     public void initView() {
-        mTvNobookCartFragment = (TextView) findViewById(R.id.tv_nobook_cart_fragment);
-        mTvNologinCartFragment = (TextView) findViewById(R.id.tv_nologin_cart_fragment);
+        setTitleCenter("购物车");
+        setTitleRight("修改", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView tv = (TextView) v;
+                String name = tv.getText().toString().trim();
+                if ("修改".equals(name)) {
+                    tv.setText("完成");
+                    mLlSettlementCartFragment.setVisibility(View.GONE);
+                    mLlDeleteCartFragment.setVisibility(View.VISIBLE);
+                } else if ("完成".equals(name)) {
+                    tv.setText("修改");
+                    mTvAllpriceCartFragment.setText("0.0");
+                    mLlSettlementCartFragment.setVisibility(View.VISIBLE);
+                    mLlDeleteCartFragment.setVisibility(View.GONE);
+                }
+            }
+        });
         mRvCartsActivity = (RecyclerView) findViewById(R.id.rv_carts_fragment);
         mTvAllpriceCartFragment = (TextView) findViewById(R.id.tv_allprice_cart_fragment);
         mCbSelectallCartFragment = (CheckBox) findViewById(R.id.cb_selectall_cart_fragment);
         mTvSettlementCartFragment = (TextView) findViewById(R.id.tv_settlement_cart_fragment);
+        mLlBottom = (LinearLayout) findViewById(R.id.ll_bottom);
+        mLlNobookCartFragment = (LinearLayout) findViewById(R.id.ll_nobook_cart_fragment);
+        mBtDostrollCartFragment = (Button) findViewById(R.id.bt_dostroll_cart_fragment);
+        mLlNologinCartFragment = (LinearLayout) findViewById(R.id.ll_nologin_cart_fragment);
+        mBtDologinCartFragment = (Button) findViewById(R.id.bt_dologin_cart_fragment);
+
+        mLlSettlementCartFragment = (LinearLayout) findViewById(R.id.ll_settlement_cart_fragment);
+        mLlDeleteCartFragment = (LinearLayout) findViewById(R.id.ll_delete_cart_fragment);
+        mTvDeleteCartFragment = (TextView) findViewById(R.id.tv_delete_cart_fragment);
+
+        mTvDeleteCartFragment.setOnClickListener(this);
+        mBtDologinCartFragment.setOnClickListener(this);
+        mBtDostrollCartFragment.setOnClickListener(this);
 
         mCbSelectallCartFragment.setChecked(false);
         mCbSelectallCartFragment.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (mCartses==null) {
+                if (mCartses == null || mCartses.size() == 0) {
                     Toast.makeText(mActivitySelf, "请先添加购物车再进行操作", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -78,8 +112,16 @@ public class CartFragment extends SBaseFragment {
                 mTvAllpriceCartFragment.setText((vjian) + "");
                 int i = countAmount();
                 mTvSettlementCartFragment.setText("结算(" + i + ")");
+                mTvDeleteCartFragment.setText("删除（" + i + "）");
                 if (mMyAdapter != null) {
+//                    mCartses=CartsDao.getCartsDao().getAllCartsByUserId(SBaseApp.onUserId);
+//                    Logger.i(mCartses.toString());
+//                    mMyAdapter.mEntities.clear();
+//                    mMyAdapter.mEntities=CartsDao.getCartsDao().getAllCartsByUserId(SBaseApp.onUserId);
+//                    Logger.i(mMyAdapter.mEntities.toString());
+//                    Logger.i(mCartses.toString());
                     mMyAdapter.notifyDataSetChanged();
+//                    initDatas();
                 }
             }
         });
@@ -89,7 +131,7 @@ public class CartFragment extends SBaseFragment {
 
             @Override
             public void onClick(View v) {
-                if (mCartses==null) {
+                if (mCartses == null || mCartses.size() == 0) {
                     Toast.makeText(mActivitySelf, "请先添加购物车再进行操作", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -107,6 +149,16 @@ public class CartFragment extends SBaseFragment {
                 }
                 float vv = countPrice();
                 float vjian = (float) (Math.round((vv) * 100)) / 100;
+
+                for (Integer cartsid : datas) {
+                    Carts carts = CartsDao.getCartsDao().getCartsByCartId(cartsid);
+                    Books books = BooksDao.getBooksDao().getBooksById(carts.getBookid());
+                    if (books.getStockBalance()<carts.getAmount()) {
+                        Toast.makeText(mActivitySelf, books.getName()+"  库存不足", Toast.LENGTH_SHORT).show();
+                        //这里只要发现一本书库存不足就会提示，
+                        return;
+                    }
+                }
                 gotoActivity(OrderActivity.class, "cartsids", datas, "allprice", vjian);
             }
         });
@@ -115,22 +167,36 @@ public class CartFragment extends SBaseFragment {
 
     @Override
     public void initDatas() {
-
         mCartses = CartsDao.getCartsDao().getAllCartsByUserId(SBaseApp.onUserId);
-
+//        Logger.i(mCartses.toString());
         if (SBaseApp.onUserId == 0) {
-            mTvNologinCartFragment.setVisibility(View.VISIBLE);
+            mLlNologinCartFragment.setVisibility(View.VISIBLE);
+            mLlBottom.setVisibility(View.GONE);
+            mLlNobookCartFragment.setVisibility(View.GONE);
+            //不该显示rv时我是把 数据清空，刷新适配器--但是盖住了点击监听了
+//            if (mMyAdapter != null) {
+//                mMyAdapter.mEntities.clear();
+//                mMyAdapter.notifyDataSetChanged();
+//            }
+            mRvCartsActivity.setVisibility(View.GONE);
+            setTitleRightGone();
         } else {
-            mTvNologinCartFragment.setVisibility(View.INVISIBLE);
+            mLlNologinCartFragment.setVisibility(View.GONE);
             if (mCartses == null || mCartses.size() == 0) {
-                mTvNobookCartFragment.setVisibility(View.VISIBLE);
+                mLlNobookCartFragment.setVisibility(View.VISIBLE);
+                mLlBottom.setVisibility(View.GONE);
                 //适配器总的集合并没清除，影响界面数据
-                if (mMyAdapter!=null) {
-                    mMyAdapter.mEntities.clear();
-                    mMyAdapter.notifyDataSetChanged();
-                }
+//                if (mMyAdapter != null) {
+//                    mMyAdapter.mEntities.clear();
+//                    mMyAdapter.notifyDataSetChanged();
+//                }
+                mRvCartsActivity.setVisibility(View.GONE);
+                setTitleRightGone();
             } else {
-                mTvNobookCartFragment.setVisibility(View.INVISIBLE);
+                setTitleRightVISIBLE();
+                mLlNobookCartFragment.setVisibility(View.GONE);
+                mLlBottom.setVisibility(View.VISIBLE);
+                mRvCartsActivity.setVisibility(View.VISIBLE);
                 showRV(mCartses);
             }
         }
@@ -165,6 +231,7 @@ public class CartFragment extends SBaseFragment {
 
                 int i = countAmount();
                 mTvSettlementCartFragment.setText("结算(" + i + ")");
+                mTvDeleteCartFragment.setText("删除（" + i + "）");
             }
         });
 
@@ -186,7 +253,7 @@ public class CartFragment extends SBaseFragment {
     }
 
     /**
-     * 计算当前购物车所有选中商品的总数量
+     * 计算当前购物车所有选中商品的总数目数量
      *
      * @return
      */
@@ -198,6 +265,16 @@ public class CartFragment extends SBaseFragment {
             }
         }
         return v;
+    }
+
+    private void deleteCheckedBooks() {
+        for (Carts carts : mCartses) {
+            if (carts.isChecked()) {
+                CartsDao.getCartsDao().deleteCarts(carts);
+            }
+//            initView();
+            initDatas();
+        }
     }
 
 
@@ -225,5 +302,33 @@ public class CartFragment extends SBaseFragment {
         System.out.println("CartFragment.onResume");
         initView();
         initDatas();
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id) {
+            case R.id.bt_dologin_cart_fragment:
+                gotoActivity(LoginActivity.class);
+                break;
+            case R.id.bt_dostroll_cart_fragment:
+                Logger.i("cccccccccccccccccccccccc");
+                mOncheckedListener.onChecked("home");
+                break;
+            case R.id.tv_delete_cart_fragment:
+                deleteCheckedBooks();
+                break;
+        }
+    }
+
+
+    private OncheckedListener mOncheckedListener;
+
+    public void setOncheckedListener(OncheckedListener oncheckedListener) {
+        mOncheckedListener = oncheckedListener;
+    }
+
+    public interface OncheckedListener {
+        void onChecked(String frag);
     }
 }

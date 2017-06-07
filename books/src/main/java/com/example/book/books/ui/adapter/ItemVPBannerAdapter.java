@@ -14,7 +14,7 @@ import java.util.List;
  * Created by Admin on 2017/5/12.
  */
 
-public class ItemVPBannerAdapter extends PagerAdapter {
+public class ItemVPBannerAdapter extends PagerAdapter implements View.OnClickListener {
 
     private Context mContext;
     private List<String> mEntities;
@@ -28,6 +28,8 @@ public class ItemVPBannerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         ImageView view = new ImageView(mContext);
         Glide.with(mContext).load(mEntities.get(position)).into(view);
+        view.setTag(position);
+        view.setOnClickListener(this);
         container.addView(view);
         return view;
     }
@@ -46,5 +48,20 @@ public class ItemVPBannerAdapter extends PagerAdapter {
     @Override
     public boolean isViewFromObject(View view, Object o) {
         return view == o;
+    }
+
+    private OnItemClickedListener mOnItemClickedListener;
+
+    public void setOnItemClickedListener(OnItemClickedListener onItemClickedListener) {
+        mOnItemClickedListener = onItemClickedListener;
+    }
+
+    @Override
+    public void onClick(View v) {
+        mOnItemClickedListener.onItemClick((Integer) v.getTag());
+    }
+
+    public interface OnItemClickedListener{
+        void onItemClick(int position);
     }
 }

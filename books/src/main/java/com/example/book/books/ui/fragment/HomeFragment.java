@@ -18,6 +18,7 @@ import com.example.book.books.R;
 import com.example.book.books.base.SBaseFragment;
 import com.example.book.books.entity.TypeEntity;
 import com.example.book.books.model.BooksType;
+import com.example.book.books.ui.activity.BookDetailActivity;
 import com.example.book.books.ui.activity.BookListActivity;
 import com.example.book.books.ui.activity.SearchActivity;
 import com.example.book.books.ui.adapter.ItemRVTypeAdapter;
@@ -84,10 +85,10 @@ public class HomeFragment extends SBaseFragment {
     @Override
     public void initDatas() {
         //模拟数据
-        String pathAssets0 = "file:///android_asset/zhineng.png";
-        String pathAssets1 = "file:///android_asset/changxiang.png";
-        String pathAssets2 = "file:///android_asset/huanlesong.png";
-        String pathAssets3 = "file:///android_asset/like.png";
+        String pathAssets0 = "file:///android_asset/zhineng_b.png";
+        String pathAssets1 = "file:///android_asset/baibai_b.png";
+        String pathAssets2 = "file:///android_asset/huanlesong_b.png";
+        String pathAssets3 = "file:///android_asset/like_b.png";
         mBannerPath.add(pathAssets3);
         mBannerPath.add(pathAssets0);
         mBannerPath.add(pathAssets1);
@@ -135,6 +136,10 @@ public class HomeFragment extends SBaseFragment {
                     gotoActivity(BookListActivity.class,"booktype", BooksType.BOOKS_TYPE_NEW);
                 }if ("畅销榜".equals(name)) {
                     Toast.makeText(mActivitySelf, "畅销", Toast.LENGTH_SHORT).show();
+                    gotoActivity(BookListActivity.class,"booktype", BooksType.BOOKS_TYPE_HOT);
+                }if("童书榜".equals(name)){
+                    Toast.makeText(mActivitySelf, "童书", Toast.LENGTH_SHORT).show();
+                    gotoActivity(BookListActivity.class,"booktype", BooksType.BOOKS_TYPE_CHILD);
                 }
             }
         });
@@ -189,6 +194,20 @@ public class HomeFragment extends SBaseFragment {
                     cancelTimer();
                 }
 
+            }
+        });
+        mItemVPBannerAdapter.setOnItemClickedListener(new ItemVPBannerAdapter.OnItemClickedListener() {
+            @Override
+            public void onItemClick(int position) {
+                if (position==1) {
+                    gotoActivity(BookDetailActivity.class, "id", 6);
+                }else if(position==2){
+                    gotoActivity(BookDetailActivity.class, "id", 7);
+                }else if(position==3){
+                    gotoActivity(BookDetailActivity.class, "id", 8);
+                } else if (position == 4) {
+                    gotoActivity(BookDetailActivity.class, "id", 9);
+                }
             }
         });
         //最开始的定时执行的，onPause或dragging后，就不再执行了

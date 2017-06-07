@@ -41,6 +41,9 @@ public class Books {
     @Column(name = "stockBalance")
     private int stockBalance;
 
+    @Column(name = "ISBN")
+    private String ISBN;
+
     public int getBookid() {
         return bookid;
     }
@@ -121,6 +124,14 @@ public class Books {
         this.stockBalance = stockBalance;
     }
 
+    public String getISBN() {
+        return ISBN;
+    }
+
+    public void setISBN(String ISBN) {
+        this.ISBN = ISBN;
+    }
+
     @Override
     public String toString() {
         return "Books{" +
@@ -134,6 +145,7 @@ public class Books {
                 ", type=" + type +
                 ", pic='" + pic + '\'' +
                 ", stockBalance=" + stockBalance +
+                ", ISBN='" + ISBN + '\'' +
                 '}';
     }
 }

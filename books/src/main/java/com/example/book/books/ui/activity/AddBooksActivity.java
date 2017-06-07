@@ -15,6 +15,8 @@ import com.example.book.books.model.Books;
 import com.example.book.books.model.Purchase;
 import com.example.book.books.ui.adapter.ItemVPPreAdapter;
 
+import org.xutils.common.util.MD5;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +33,7 @@ public class AddBooksActivity extends SBaseActivity implements View.OnClickListe
     private TextView mTvResetAddbooksActivity;
     private EditText mEdtAuthorAddbooksActivity;
 
-    private int mNowPic=0;
+    private int mNowPic = 0;
     private int mBooktype;
 
     @Override
@@ -86,7 +88,7 @@ public class AddBooksActivity extends SBaseActivity implements View.OnClickListe
             @Override
             public void onPageSelected(int position) {
                 System.out.println("position = [" + position + "]");
-                mNowPic=position;
+                mNowPic = position;
             }
 
             @Override
@@ -108,20 +110,34 @@ public class AddBooksActivity extends SBaseActivity implements View.OnClickListe
                 String press = mEdtPressAddbooksActivity.getText().toString().trim();
                 String stock = mEdtStockAddbooksActivity.getText().toString().trim();
                 String author = mEdtAuthorAddbooksActivity.getText().toString().trim();
+//                byte[] isbn=name.getBytes();
+//                System.out.println("isbn = " + isbn);
 
-                if (name==null||"".equals(name)||intro==null||"".equals(intro)||price==null||"".equals(price)
-                        ||marketprice==null||"".equals(marketprice)||press==null||"".equals(press)
-                        ||stock==null||"".equals(stock)||author==null||"".equals(author)) {
+//                String encode = Base64.encodeToString((name+author).getBytes(),Base64.DEFAULT);
+//
+//                System.out.println("encode = " + encode);
+
+                String s = MD5.md5(name + author);
+                boolean b = BooksDao.getBooksDao().checkISBN(s);
+                if (b) {
+                    Toast.makeText(mActivitySelf, "已存在相同书名和作者的书籍，请确认输入数据的正确性", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (name == null || "".equals(name) || intro == null || "".equals(intro) || price == null || "".equals(price)
+                        || marketprice == null || "".equals(marketprice) || press == null || "".equals(press)
+                        || stock == null || "".equals(stock) || author == null || "".equals(author)) {
                     Toast.makeText(mActivitySelf, "不可以输入空数据", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                Books books=new Books() ;
+                Books books = new Books();
                 books.setName(name);
                 books.setAuthor(author);
                 books.setIntro(intro);
                 float v1 = Float.parseFloat(price);
                 books.setPrice(v1);
+                books.setISBN(s);
                 float v2 = Float.parseFloat(marketprice);
                 books.setMarketPrice(v2);
                 books.setPress(press);
@@ -133,7 +149,7 @@ public class AddBooksActivity extends SBaseActivity implements View.OnClickListe
                 BooksDao.getBooksDao().addBook(books);
                 int bookid = books.getBookid();
                 //添加入库记录
-                Purchase purchase=new Purchase() ;
+                Purchase purchase = new Purchase();
                 purchase.setBookid(bookid);
                 purchase.setBookName(name);
                 purchase.setBookPic(mPics.get(mNowPic));

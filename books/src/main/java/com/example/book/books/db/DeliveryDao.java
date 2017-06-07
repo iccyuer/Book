@@ -39,7 +39,17 @@ public class DeliveryDao {
     public List<Delivery> getAllDelivery(){
         try {
             return x.getDb(BooksDaoConfig.getBooksDaoConfig()).selector(Delivery.class)
-                    .findAll();
+                    .orderBy("deliveryid",true).findAll();
+        } catch (DbException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Delivery> getSomeDelivery(long timea,long timeb){
+        try {
+            return x.getDb(BooksDaoConfig.getBooksDaoConfig()).selector(Delivery.class)
+                    .where("deliveryTime",">=",timea).and("deliveryTime","<=",timeb).findAll();
         } catch (DbException e) {
             e.printStackTrace();
         }

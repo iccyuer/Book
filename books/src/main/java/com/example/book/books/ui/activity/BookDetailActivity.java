@@ -28,7 +28,6 @@ import com.example.book.books.model.Carts;
 import com.example.book.books.model.Collects;
 import com.example.book.books.ui.adapter.ItemVPBookDetailAdapter;
 import com.example.book.books.ui.views.BezierEvalutor;
-import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +52,7 @@ public class BookDetailActivity extends SBaseActivity {
     private Books mBooks;
     private ImageView mImgvCollectBookDetail;
     private ImageView mImgvCartBookDetail;
+    private TextView mTvDobuyBookDetail;
 
     //是否检查过当前用户放入过购物车
     private boolean isCheckedCarts;
@@ -88,6 +88,8 @@ public class BookDetailActivity extends SBaseActivity {
         mTvAuthorDetailBook = (TextView) findViewById(R.id.tv_author_detail_book);
         mTvPressDetailBook = (TextView) findViewById(R.id.tv_press_detail_book);
 
+        mTvDobuyBookDetail = (TextView) findViewById(R.id.tv_dobuy_book_detail);
+
         mTvStockalanceDetailBook = (TextView) findViewById(R.id.tv_stockalance_detail_book);
 
         mVbDetailBook = (WebView) findViewById(R.id.vb_detail_book);
@@ -105,11 +107,51 @@ public class BookDetailActivity extends SBaseActivity {
                     gotoActivity(LoginActivity.class);
                     return;
                 }
-                addCartAnim();
-                addCartDB();
+                addCartDB(false);
             }
         };
         regesiterBTaddCartLis();
+
+        mTvDobuyBookDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (onUserId == 0) {
+                    gotoActivity(LoginActivity.class);
+                    return;
+                }
+//                addCartDB(true);
+                int bookid = mBooks.getBookid();
+                String name = mBooks.getName();
+                float price = mBooks.getPrice();
+                float marketPrice = mBooks.getMarketPrice();
+                String pic = mBooks.getPic();
+
+                if (isInCarts) {
+                    Toast.makeText(mActivitySelf, "购物车已经存在当前书籍，请选择购买", Toast.LENGTH_SHORT).show();
+                    gotoActivity(MainActivity.class,"fragment","carts");
+                }else{
+                    isInCarts=true;
+                    //初始添加之前判断库存是不是最少为1
+                    if (mBooks.getStockBalance()<1) {
+                        Toast.makeText(mActivitySelf, "当前书籍库存不足", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    Carts carts1 = new Carts();
+                    carts1.setUserid(onUserId);
+                    carts1.setBookid(bookid);
+                    carts1.setName(name);
+                    carts1.setPrice(price);
+                    carts1.setPic(pic);
+                    carts1.setMarketPrice(marketPrice);
+                    carts1.setAmount(1);
+                    CartsDao.getCartsDao().addCarts(carts1);
+                    ArrayList<Integer> datas = new ArrayList<Integer>();
+                    datas.add(carts1.getCartid());
+                    gotoActivity(OrderActivity.class, "cartsids", datas, "allprice", price);
+                }
+            }
+        });
 
     }
 
@@ -140,7 +182,7 @@ public class BookDetailActivity extends SBaseActivity {
 
     }
 
-    private void addCartDB() {
+    private void addCartDB(boolean isbuy) {
         int bookid = mBooks.getBookid();
         String name = mBooks.getName();
         float price = mBooks.getPrice();
@@ -148,8 +190,13 @@ public class BookDetailActivity extends SBaseActivity {
         String pic = mBooks.getPic();
 
         if (!isInCarts) {
-            Logger.i("当前用户没有添加过，添加");
+//            Logger.i("当前用户没有添加过，添加");
             isInCarts=true;
+            //初始添加之前判断库存是不是最少为1
+            if (mBooks.getStockBalance()<1) {
+                Toast.makeText(mActivitySelf, "当前书籍库存不足", Toast.LENGTH_SHORT).show();
+                return;
+            }
             Carts carts1 = new Carts();
             carts1.setUserid(onUserId);
             carts1.setBookid(bookid);
@@ -163,9 +210,32 @@ public class BookDetailActivity extends SBaseActivity {
             Carts carts = CartsDao.getCartsDao().getCartsByBookIdAndUserId(bookid, onUserId);
             int amount = carts.getAmount();
             amount++;
+            //增加数量是判断
+            if (amount>mBooks.getStockBalance()) {
+                Toast.makeText(mActivitySelf, "当前书籍库存不足", Toast.LENGTH_SHORT).show();
+                return;
+            }
             CartsDao.getCartsDao().updateCartsAmount(carts, amount);
         }
         Toast.makeText(mActivitySelf, "加入购物车成功", Toast.LENGTH_SHORT).show();
+        if (!isbuy) {
+            addCartAnim();
+        }
+        updateStockBalance();
+    }
+
+    private void updateStockBalance() {
+        //添加成功后从界面上更新库存量（不是真实减少库存--并不影响其他用户加入购物车）
+        int bookid = mBooks.getBookid();
+        Carts carts = CartsDao.getCartsDao().getCartsByBookIdAndUserId(bookid, onUserId);
+        if (carts!=null) {
+            int amount = carts.getAmount();
+            int stockBalance=mBooks.getStockBalance();
+            mTvStockalanceDetailBook.setText("库存数量："+(stockBalance-amount));
+        }else{
+            int stockBalance=mBooks.getStockBalance();
+            mTvStockalanceDetailBook.setText("库存数量："+(stockBalance));
+        }
     }
 
     private void addCartAnim() {
@@ -279,8 +349,14 @@ public class BookDetailActivity extends SBaseActivity {
         }
         Integer amount = CartsDao.getCartsDao().getCartsAllAmounts(onUserId);
         if (amount!=0) {
-            mTvShowPointBookDetail.setVisibility(View.VISIBLE);
-            mTvShowPointBookDetail.setText(amount+"");
+            if (amount>99) {
+                mTvShowPointBookDetail.setVisibility(View.VISIBLE);
+                mTvShowPointBookDetail.setText("99+");
+            }else{
+                mTvShowPointBookDetail.setVisibility(View.VISIBLE);
+                mTvShowPointBookDetail.setText(amount+"");
+//                mTvShowPointBookDetail.setText("99+");
+            }
         }else{
             isEmptyCarts=true;
         }
@@ -347,8 +423,8 @@ public class BookDetailActivity extends SBaseActivity {
         mTvMarketDetailBook.setText(marketPrice + "");
         mTvAuthorDetailBook.setText(author);
         mTvPressDetailBook.setText(press);
-        mTvStockalanceDetailBook.setText("库存数量："+stockBalance);
-
+//        mTvStockalanceDetailBook.setText("库存数量："+stockBalance);
+        updateStockBalance();
     }
 
     private void showVP(Books books) {

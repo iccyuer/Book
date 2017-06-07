@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="请选择预选图片，或者~"/>
+            android:text="请选择预选图片"/>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vp_addbooks_activity"

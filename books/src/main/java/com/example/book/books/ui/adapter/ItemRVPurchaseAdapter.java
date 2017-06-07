@@ -23,7 +23,6 @@ import java.util.List;
 public class ItemRVPurchaseAdapter extends RecyclerView.Adapter<PurchaseViewHolder> implements View.OnClickListener {
     private Context mContext;
     List<Purchase> mEntities;
-    private ItemRVOrderBookAdapter mMyAdapter;
 
     public ItemRVPurchaseAdapter(Context context, List<Purchase> entities) {
         mContext = context;

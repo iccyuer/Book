@@ -116,6 +116,14 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
+    public void setTitleRightGone(){
+        mTitleRight.setVisibility(View.GONE);
+    }
+
+    public void setTitleRightVISIBLE(){
+        mTitleRight.setVisibility(View.VISIBLE);
+    }
+
     public void setTitleLeft(String text) {
         setTitleLeft(text, null);
     }
@@ -150,6 +158,12 @@ public abstract class BaseFragment extends Fragment {
     public void gotoActivity(Class des,String key,int data) {
         Intent intent = new Intent(mActivitySelf, des);
         intent.putExtra(key,data);
+        startActivity(intent);
+    }
+
+    public void gotoActivity(Class des, String key, String data) {
+        Intent intent = new Intent(mActivitySelf, des);
+        intent.putExtra(key, data);
         startActivity(intent);
     }
 
